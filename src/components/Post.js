@@ -6,6 +6,9 @@ const Post = ({ addPost }) => {
   const [post, setPost] = useState('');
   const onSubmit = (e) => {
     e.preventDefault();
+    if (!post) {
+      return;
+    }
     addPost({ name, post });
     setPost('');
   };

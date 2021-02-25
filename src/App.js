@@ -1,25 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+import Home from './components/Home';
+import Feed from './components/Feed';
+import Post from './components/Post';
+import Feeds from './components/Feeds';
+import Profile from './components/Profile';
+import { useState } from 'react';
 
-function App() {
+const App = () => {
+  const [feedState, setFeedState] = useState([
+    { name: 'Bob', post: 'This is my first post' },
+    { name: 'Sally', post: 'Woah, this is a cool app!' },
+  ]);
+  const [profileStatus, setProfileStatus] = useState([]);
+  const handlePost = (post) => {
+    setFeedState([...feedState, post]);
+  };
+  const handleProfile = (profileStatus) => {
+    setProfileStatus(profileStatus);
+  };
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='container'>
+      <Home />
+      <Post addPost={handlePost} />
+      <Feeds feedState={feedState} />
+      <Profile profileStatus={handleProfile} />
     </div>
   );
-}
+};
 
 export default App;
